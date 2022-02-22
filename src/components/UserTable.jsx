@@ -1,7 +1,7 @@
 import React from 'react';
 
 // Declarar componente UserTable que recibe por props los datos 
-const UserTable = ({users}) => {
+const UserTable = (props) => {
     // console.log(users);
     return ( 
         <table>
@@ -16,16 +16,19 @@ const UserTable = ({users}) => {
                 {
                     // Operador ternario para mostrar datos de usuarios
                     // o "No users" en caso de no recibir datos.
-                    users.length > 0 ?
+                    props.users.length > 0 ?
                     // Usar metodo map de arrays para renderizar los items
                     // de la tabla con los usuarios recibidos por props.
-                    users.map((user) => {
+                    props.users.map((user) => {
                         return <tr key={user.id}>
                             <td>{user.name}</td>
                             <td>{user.username}</td>
                             <td>
                                 <button className='button muted-button'>Edit</button>
-                                <button className='button muted-button'>Delete</button>
+                                <button className='button muted-button'
+                                    onClick={() => {props.deleteUser(user.id)}}>
+                                    Delete
+                                </button>
                             </td>
                         </tr>
                     }) : (
